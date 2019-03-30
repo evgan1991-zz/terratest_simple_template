@@ -51,7 +51,6 @@ resource "local_file" "example2" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| region | Region on which test resources will be created | string | us-east-1 | no |
 | example | Example variable | string | example | no |
 | example2 | Example variable2 | string | example2 | no |
 
@@ -62,7 +61,7 @@ resource "local_file" "example2" {
 | Name | Description |
 |------|-------------|
 | example | - |
-| example | - |
+| example2 | - |
 
 
 ## Terraform versions
