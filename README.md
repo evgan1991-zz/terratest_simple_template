@@ -1,18 +1,31 @@
 # Terraform Basic Example
 
+## Description
 This folder contains a very simple Terraform module to demonstrate how you can use Terratest to write automated tests
 for your Terraform code. This module takes in an input variable called `example`, renders it using a `template_file`
 data source, and outputs the result in an output variable called `example`.
 
-Check out [test/terraform_basic_example_test.go](/test/terraform_basic_example_test.go) to see how you can write
-automated tests for this simple module.
+## Usage
 
-Note that this module doesn't do anything useful; it's just here to demonstrate the simplest usage pattern for
-Terratest. For a slightly more complicated, real-world example of a Terraform module and the corresponding tests, see
-[terraform-aws-example](/examples/terraform-aws-example).
+```hcl
+data "template_file" "example" {
+  template = "${var.example}"
+}
 
+data "template_file" "example2" {
+  template = "${var.example2}"
+}
 
+resource "local_file" "example" {
+  content  = "${data.template_file.example.rendered} + ${data.template_file.example2.rendered}"
+  filename = "example.txt"
+}
 
+resource "local_file" "example2" {
+  content  = "${data.template_file.example2.rendered}"
+  filename = "example2.txt"
+}
+```
 
 ## Running this module manually
 
@@ -23,7 +36,6 @@ Terratest. For a slightly more complicated, real-world example of a Terraform mo
 
 
 
-
 ## Running automated tests against this module
 
 1. Install [Terraform](https://www.terraform.io/) and make sure it's on your `PATH`.
@@ -31,3 +43,39 @@ Terratest. For a slightly more complicated, real-world example of a Terraform mo
 1. `cd test`
 1. `dep ensure`
 1. `go test -v -run TestTerraformBasicExample`
+
+
+
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| example | Example variable | string | example | no |
+| example2 | Example variable2 | string | example2 | no |
+
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| example | - |
+| example2 | - |
+
+
+## Terraform versions
+
+Terraform version 0.11.11 or newer is required for this module to work.
+
+## Contributing
+
+None
+
+## License
+
+Apache2.0 Licensed.
+
+## Authors
+
+Yauheni Anashkin
