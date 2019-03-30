@@ -9,7 +9,3 @@ module "example" {
   example  = "${var.example}"
   example2 = "${var.example2}"
 }
-
-
-
-
