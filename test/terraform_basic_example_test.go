@@ -2,42 +2,42 @@ package test
 
 import (
 	"testing"
-	// "fmt"
-	// "time"
-    // "math/rand"
+	"fmt"
+	"time"
+    "math/rand"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
 
 var terraformDirectory = "../examples"
 var region             = "us-east-1"
-// var account            = ""
+var account            = ""
 
-// func randSeq(n int) string {
-// 	letters := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-//     b := make([]rune, n)
-//     for i := range b {
-//         b[i] = letters[rand.Intn(len(letters))]
-//     }
-//     return string(b)
-// }
+func randSeq(n int) string {
+	letters := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    b := make([]rune, n)
+    for i := range b {
+        b[i] = letters[rand.Intn(len(letters))]
+    }
+    return string(b)
+}
 
-// func Test_SetUp(t *testing.T) {
-// 	rand.Seed(time.Now().UnixNano()) //IF YOU USE randSeq
+func Test_SetUp(t *testing.T) {
+	rand.Seed(time.Now().UnixNano()) //IF YOU USE randSeq
 
-// 	terraformOptions := &terraform.Options{
-// 		TerraformDir: terraformDirectory,
-// 		Vars: map[string]interface{}{
-// 			"aws_region": region,
-// 			"example": randSeq(10), //EXAMPLE FOR THIS MODULE! NOT NECESSARY
-// 		},
-// 	}
-// 	defer terraform.Destroy(t, terraformOptions)
-// 	terraform.Init(t, terraformOptions)
-// 	terraform.Apply(t, terraformOptions)
-// 	account = terraform.Output(t, terraformOptions, "account_id")
-// 	fmt.Println("Your account id: " + account)
-// }
+	terraformOptions := &terraform.Options{
+		TerraformDir: terraformDirectory,
+		Vars: map[string]interface{}{
+			"aws_region": region,
+			"example": randSeq(10), //EXAMPLE FOR THIS MODULE! NOT NECESSARY
+		},
+	}
+	defer terraform.Destroy(t, terraformOptions)
+	terraform.Init(t, terraformOptions)
+	terraform.Apply(t, terraformOptions)
+	account = terraform.Output(t, terraformOptions, "account_id")
+	fmt.Println("Your account id: " + account)
+}
 
 // An example of how to test the simple Terraform module in examples/terraform-basic-example using Terratest.
 func TestTerraformBasicExample(t *testing.T) {

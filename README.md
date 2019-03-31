@@ -1,6 +1,7 @@
 # Terraform Basic Example
 
 ## Description
+[ORIGINAL MODULE](https://github.com/gruntwork-io/terratest/tree/master/examples/terraform-basic-example)
 This folder contains a very simple Terraform module to demonstrate how you can use Terratest to write automated tests
 for your Terraform code. This module takes in an input variable called `example`, renders it using a `template_file`
 data source, and outputs the result in an output variable called `example`.
